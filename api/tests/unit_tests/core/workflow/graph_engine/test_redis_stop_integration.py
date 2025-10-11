@@ -49,7 +49,7 @@ class TestRedisStopIntegration:
             # Verify the command data
             command_json = calls[0][0][1]
             command_data = json.loads(command_json)
-            assert command_data["command_type"] == CommandType.ABORT.value
+            assert command_data["command_type"] == CommandType.ABORT
             assert command_data["reason"] == "Test stop"
 
     def test_graph_engine_manager_sends_pause_command(self):
@@ -148,12 +148,12 @@ class TestRedisStopIntegration:
         # Verify serialized commands
         abort_command_json = calls[0][0][1]
         abort_command_data = json.loads(abort_command_json)
-        assert abort_command_data["command_type"] == CommandType.ABORT.value
+        assert abort_command_data["command_type"] == CommandType.ABORT
         assert abort_command_data["reason"] == "User requested stop"
 
         pause_command_json = calls[1][0][1]
         pause_command_data = json.loads(pause_command_json)
-        assert pause_command_data["command_type"] == CommandType.PAUSE.value
+        assert pause_command_data["command_type"] == CommandType.PAUSE
         assert pause_command_data["reason"] == "User requested pause"
 
         # Check expire was set for each
@@ -170,10 +170,10 @@ class TestRedisStopIntegration:
 
         # Mock command data
         abort_command_json = json.dumps(
-            {"command_type": CommandType.ABORT.value, "reason": "Test abort", "payload": None}
+            {"command_type": CommandType.ABORT, "reason": "Test abort", "payload": None}
         )
         pause_command_json = json.dumps(
-            {"command_type": CommandType.PAUSE.value, "reason": "Pause requested", "payload": None}
+            {"command_type": CommandType.PAUSE, "reason": "Pause requested", "payload": None}
         )
 
         # Mock pipeline execute to return commands
