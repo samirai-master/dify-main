@@ -169,9 +169,7 @@ class TestRedisStopIntegration:
         mock_redis.pipeline.return_value.__exit__ = Mock(return_value=None)
 
         # Mock command data
-        abort_command_json = json.dumps(
-            {"command_type": CommandType.ABORT, "reason": "Test abort", "payload": None}
-        )
+        abort_command_json = json.dumps({"command_type": CommandType.ABORT, "reason": "Test abort", "payload": None})
         pause_command_json = json.dumps(
             {"command_type": CommandType.PAUSE, "reason": "Pause requested", "payload": None}
         )
