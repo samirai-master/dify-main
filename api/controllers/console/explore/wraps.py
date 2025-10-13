@@ -60,10 +60,9 @@ def user_allowed_to_access_app(view: Callable[Concatenate[InstalledApp, P], R] |
             if feature.webapp_auth.enabled:
                 assert isinstance(current_user, Account)
                 app_id = installed_app.app_id
-                app_code = AppService.get_app_code_by_id(app_id)
                 res = EnterpriseService.WebAppAuth.is_user_allowed_to_access_webapp(
                     user_id=str(current_user.id),
-                    app_code=app_code,
+                    app_id=app_id,
                 )
                 if not res:
                     raise AppAccessDeniedError()
